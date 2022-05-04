@@ -12,4 +12,11 @@ router.get('/:id(\\d+)', async function(req, res, next) {
     res.status(result.status).send(result.data);
 
 });
+router.post('/new', async function(req, res, next) {
+    let pessoa = req.body;
+    console.log("[pessoaroutes] Saving user " + JSON.stringify(pessoa));
+    let result = await PessoaModels.addUser(pessoa);
+    res.status(result.status).send(result.data);
+
+});
 module.exports = router;
