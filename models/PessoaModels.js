@@ -6,7 +6,7 @@ const app = express();
 module.exports.getPessoas = async function(id) {
     console.log("[PessoaModels.getPessoas] id = " + JSON.stringify(id))
     try {
-        let sql = "select * from pessoa where pessoa_id = &1";
+        let sql = "select * from pessoa where pessoa_id = $1";
         let result = await client.query(sql, [id]);
         let pessoa = result.rows;
         if (pessoa.lenght > 0){
