@@ -13,14 +13,7 @@ router.get('/:id(\\d+)', async function(req, res, next) {
 
 });
 router.post('/register',async function(req, res, next) {
-    let nome = req.body.nome;
-    let morada = req.body.morada;
-    let dtnasc = req.body.dtnasc;
-    let genero = req.body.genero;
-    let email = req.body.email;
-    let pass = req.body.pass;
-    let tlm = req.body.tlm;
-    let result = await PessoaModels.registerPessoa(nome,morada,dtnasc,genero,email,pass,tlm);
-    res.status(result.status).send(result.result);
+   let body = req.body
+    let result = await PessoaModels.registerPessoa(body);
 });
 module.exports = router;
