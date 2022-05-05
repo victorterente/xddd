@@ -25,6 +25,18 @@ module.exports.getPessoas = async function(id) {
 
 
 }
+module.exports.getAllPessoas = async function () {
+    try {
+        let sql = "Select * from pessoa";
+        let result = await client.query(sql);
+        let pessoa = result;
+        return { status: 200, result: pessoa };
+    } catch (err) {
+        console.log(err);
+        return { status: 500, result: err };
+    }
+};
+
 
 module.exports.registerPessoa = async function (newpessoa) {
     try {
