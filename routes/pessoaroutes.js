@@ -20,7 +20,7 @@ router.post('/register',async function(req, res, next) {
     let email = req.body.email;
     let pass = req.body.pass;
     let tlm = req.body.tlm;
-    let result = await mProd.registerPessoa(nome,morada,dtnasc,genero,email,pass,tlm);
+    let result = await PessoaModels.registerPessoa(nome,morada,dtnasc,genero,email,pass,tlm);
     res.status(result.status).send(result.result);
 });
 module.exports = router;
