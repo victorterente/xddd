@@ -12,11 +12,15 @@ router.get('/:id(\\d+)', async function(req, res, next) {
     res.status(result.status).send(result.data);
 
 });
-router.post('/new', async function(req, res, next) {
-    let pessoa = req.body;
-    console.log("[pessoaroutes] Saving user " + JSON.stringify(pessoa));
-    let result = await PessoaModels.addUser(pessoa);
-    res.status(result.status).send(result.data);
-
+router.post('/register',async function(req, res, next) {
+    let nome = req.body.nome;
+    let morada = req.body.morada;
+    let dtnasc = req.body.dtnasc;
+    let genero = req.body.genero;
+    let email = req.body.email;
+    let pass = req.body.pass;
+    let tlm = req.body.tlm;
+    let result = await mProd.registerPessoa(nome,morada,dtnasc,genero,email,pass,tlm);
+    res.status(result.status).send(result.result);
 });
 module.exports = router;
