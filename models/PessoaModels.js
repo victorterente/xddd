@@ -41,7 +41,7 @@ module.exports.registerPessoa = async function (newpessoa) {
         //      return { status: 401, result: { msg: "Já está registado" } };
         //  else {
         var sql = 'INSERT INTO pessoa (pessoa_nome, pessoa_morada, pessoa_dtnasc, pessoa_genero, pessoa_email,pessoa_pass,pessoa_tlm) VALUES ($1,$2,$3,$4,$5,$6,$7)';
-        let result = await pool.query(sql,[ nome, morada, dtnasc, genero, email, pass, tlm ])
+        let result = await client.query(sql,[ nome, morada, dtnasc, genero, email, pass, tlm ])
         return { status: 200, result: { msg: "registado com sucesso" } };;
         //   }
     } catch (err) {
