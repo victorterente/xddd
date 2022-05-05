@@ -2,6 +2,7 @@ const client = require('./connection.js')
 const express = require('express');
 const {log} = require("debug");
 const app = express();
+var pool = require("./connection");
 
 module.exports.getPessoas = async function(id) {
     console.log("[PessoaModels.getPessoas] id = " + JSON.stringify(id))
