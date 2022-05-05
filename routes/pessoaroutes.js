@@ -15,5 +15,6 @@ router.get('/:id(\\d+)', async function(req, res, next) {
 router.post('/register',async function(req, res, next) {
    let body = req.body
     let result = await PessoaModels.registerPessoa(body);
+    res.status(result.status).send(result.data);
 });
 module.exports = router;
