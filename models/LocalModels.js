@@ -4,7 +4,7 @@ const {log} = require("debug");
 const app = express();
 
 
-module.exports.getAllPessoas = async function () {
+module.exports.getAlllocais = async function () {
     try {
         let sql = "Select * from local";
         let result = await client.query(sql);
