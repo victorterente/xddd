@@ -6,8 +6,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var pessoaRouter = require('./routes/pessoaroutes');
-var tipolocalRouter = require('./routes/locaisroutes');
-
+var tipolocalRouter = require('./routes/tipolocaisroutes');
+var localRouter = require('./routes/locaisroutes');
 var app = express();
 
 app.use(logger('dev'));
@@ -20,5 +20,5 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pessoa', pessoaRouter);
 app.use('/tipolocal', tipolocalRouter);
-
+app.use('/local', localRouter);
 module.exports = app;
