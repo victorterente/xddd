@@ -7,6 +7,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var pessoaRouter = require('./routes/pessoaroutes');
 var localRouter = require('./routes/localroutes');
+var tipolocalRouter = require('./routes/tipolocalroutes');
 
 var app = express();
 
@@ -20,6 +21,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pessoa', pessoaRouter);
 app.use('/local', localRouter);
-
+app.use('/tipolocal', tipolocalRouter);
 
 module.exports = app;
