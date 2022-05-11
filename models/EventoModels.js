@@ -28,7 +28,7 @@ module.exports.registerEvento = async function (newevento) {
         //   if (result.length > 0)
         //      return { status: 401, result: { msg: "Já está registado" } };
         //  else {
-        var sql = 'INSERT INTO evento (evento_nome, evento_morada, evento_data, evento_cap, evento_desc,evento_geo) VALUES ($1,$2,$3,$4,$5,$6,$7)';
+        var sql = 'INSERT INTO evento (evento_nome, evento_morada, evento_data, evento_cap, evento_desc, evento_geo) VALUES ($1,$2,$3,$4,$5,$6)';
         let result = await client.query(sql,[ nome, morada, data , cap, desc, geo ])
         let pessoa = result.rows;
         return { status: 200, result: { msg: "registado com sucesso" }, data : pessoa };;
