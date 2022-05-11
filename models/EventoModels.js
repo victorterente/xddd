@@ -21,7 +21,7 @@ module.exports.registerEvento = async function (newevento) {
         let data = newevento.data;
         let cap = newevento.cap;
         let geo = newevento.geo;
-        let desc = newpessoa.desc;
+        let desc = newevento.desc;
 
         //var sql = "SELECT * FROM pessoa WHERE pessoa_email =?";
         //  let result = await pool.query(sql, [email]);
