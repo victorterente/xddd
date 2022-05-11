@@ -8,6 +8,7 @@ var usersRouter = require('./routes/users');
 var pessoaRouter = require('./routes/pessoaroutes');
 var localRouter = require('./routes/localroutes');
 var tipolocalRouter = require('./routes/tipolocalroutes');
+var eventoRouter = require('./routes/eventoroutes');
 
 var app = express();
 
@@ -22,5 +23,6 @@ app.use('/users', usersRouter);
 app.use('/pessoa', pessoaRouter);
 app.use('/local', localRouter);
 app.use('/tipolocal', tipolocalRouter);
+app.use('/evento', eventoRouter);
 
 module.exports = app;
