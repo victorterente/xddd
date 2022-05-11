@@ -6,7 +6,7 @@ const app = express();
 
 module.exports.getAlllocais = async function () {
     try {
-        let sql = "Select * from local";
+        let sql = "select *,st_x(local_geo) lat,st_y(local_geo) long from local;";
         let result = await client.query(sql);
         let local = result;
         return { status: 200, result: local };
