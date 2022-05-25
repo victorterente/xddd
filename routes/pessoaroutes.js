@@ -16,7 +16,7 @@ router.get('/:id(\\d+)', async function(req, res, next) {
 router.post('/login',async function(req, res, next) {
     let email = req.body.email;
     let password = req.body.pass;
-    let result = await mProd.loginPessoa(email,password);
+    let result = await PessoaModels.loginPessoa(email,password);
     res.status(result.status).send(result.result);
 });
 
