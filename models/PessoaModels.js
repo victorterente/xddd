@@ -25,6 +25,18 @@ module.exports.getPessoas = async function(id) {
 
 
 }
+
+module.exports.loginPessoa = async function (email, pass) {
+    try {
+        let sql = "SELECT pessoa.pessoa_id, admin.admin_id from pessoa left JOIN admin ON pessoa.pessoa_id = admin.pessoa_id Where pessoa.pessoa_email = $1 AND pessoa.pessoa_pass = $2 ";
+        let result = await pool.query(sql, [email, pass]);
+        if (result.length > 0) return { status: 200, result: result[0] };
+        else return { status: 401, result: { msg: "Wrong email or password" } };
+    } catch (err) {
+        console.log(err);
+        return { status: 500, result: err };
+    }
+};
 module.exports.getAllPessoas = async function () {
     try {
         let sql = "Select * from pessoa";
