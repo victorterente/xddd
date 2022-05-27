@@ -3,7 +3,13 @@ var router = express.Router();
 var EventoModels = require('../models/EventoModels');
 
 
+router.get('/:id(\\d+)', async function(req, res, next) {
+    let id = req.params.id
+    console.log("[eventoroutes] user with id:" + id);
+    let result = await EventoModels.getEvento(id);
+    res.status(result.status).send(result.data);
 
+});
 
 router.get("/", async function (req, res, next) {
     let result = await EventoModels.getAllEventos();

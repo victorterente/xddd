@@ -70,6 +70,7 @@ module.exports.getLogin = async function(pessoa) {
     }
 
 }
+
 module.exports.loginPessoa = async function (email, pass) {
     try {
         let sql = "SELECT pessoa.pessoa_id, admin.admin_id from pessoa left JOIN admin ON pessoa.pessoa_id = admin.pessoa_id Where pessoa.pessoa_email = $1 AND pessoa.pessoa_pass = $2 ";
@@ -81,6 +82,7 @@ module.exports.loginPessoa = async function (email, pass) {
         return { status: 500, result: err };
     }
 };
+
 module.exports.getAllPessoas = async function () {
     try {
         let sql = "Select * from pessoa";

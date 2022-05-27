@@ -38,3 +38,24 @@ module.exports.registerEvento = async function (newevento) {
         return { status: 500, result: err };
     }
 };
+module.exports.getEvento = async function(id) {
+    console.log("[EventoModels.getEvento] id = " + JSON.stringify(id))
+    try {
+        let sql = 'select * from evento where evento_id = $1';
+        let result = await client.query(sql, [id]);
+        let evento = result.rows;
+        // if (pessoa.lenght > 0){
+        //     console.log("[PessoaModels.getPessoas] pessoa = " + JSON.stringify(pessoa[0]) );
+        //     return { status: 200, data: pessoa[0] };
+        // } else {
+        //     return { status: 200, data: {msg:"user not found." }};
+        // }
+        return {status: 200, data: evento};
+    } catch (err) {
+        console.log(err);
+        return {status: 500, data: err};
+    }
+
+
+
+};
