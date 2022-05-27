@@ -25,7 +25,51 @@ module.exports.getPessoas = async function(id) {
 
 
 }
+module.exports.getUserLogin = async function(email, password) {
+    console.log("[PessoaModels.getUser] Login = Email: " + JSON.stringify(email)+ " Password: "+ + JSON.stringify(password));
 
+    try {
+        let sql = `select * from pessoa WHERE pessoa_email = '${email}' AND pessoa_pass = '${password}'`;
+        let result = await client.query(sql);
+        let pessoa = result.rows;
+        if (pessoa.length > 0) {
+            console.log("[PessoaModels.getUser] user = " + JSON.stringify(pessoa[0]));
+            return { status: 200, data: pessoa[0] };
+        } else {
+            return { status: 404, data: { msg: "User not found." } };
+        }
+
+    } catch (err) {
+        console.log(err);
+        return { status: 500, data: err };
+    }
+
+}
+
+module.exports.getLogin = async function(pessoa) {
+    console.log("[PessoaModels.getUser] Login = "+ JSON.stringify(pessoa));
+    if (typeof pessoa != "object" ) {
+        if (pessoa.errMsg)
+            return { status: 400, data: { msg: pessoa.errMsg } };
+        else
+            return { status: 400, data: { msg: "Malformed data" } };
+    }try {
+        let sql = `select * from pessoa WHERE pessoa_email = '${pessoa.email}' AND pessoa_pass = '${pessoa.pass}'`;
+        let result = await client.query(sql);
+        let pessoaResult = result.rows;
+        if (pessoaResult.length > 0) {
+            console.log("[userModel.getUser] user = " + JSON.stringify(pessoaResult[0]));
+            return { status: 200, data: pessoaResult[0] };
+        } else {
+            return { status: 404, data: { msg: "User not found." } };
+        }
+
+    } catch (err) {
+        console.log(err);
+        return { status: 500, data: err };
+    }
+
+}
 module.exports.loginPessoa = async function (email, pass) {
     try {
         let sql = "SELECT pessoa.pessoa_id, admin.admin_id from pessoa left JOIN admin ON pessoa.pessoa_id = admin.pessoa_id Where pessoa.pessoa_email = $1 AND pessoa.pessoa_pass = $2 ";
