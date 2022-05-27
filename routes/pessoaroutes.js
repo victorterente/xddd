@@ -21,6 +21,14 @@ router.get('/login/:email/:password', async function(req, res, next) {
     res.status(result.status).send(result.data);
 
 });
+
+router.post('/login', async function(req, res, next) {
+    let user = req.body;
+    console.log("[pessoaroutes] Login: " + JSON.stringify(user));
+    let result = await PessoaModels.getLogin(user);
+    res.status(result.status).send(result.data);
+
+});
 // router.post('/login',async function(req, res, next) {
 //   let email = req.body.email;
 //   let password = req.body.pass;
