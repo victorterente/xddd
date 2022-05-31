@@ -5,7 +5,7 @@ const app = express();
 
 module.exports.getAllEventos = async function () {
     try {
-        let sql = "select *,st_x(evento_geo) lat,st_y(evento_geo) long from evento;";
+        let sql = "select *,st_x(evento_geo) lat1,st_y(evento_geo) long1 from evento;";
         let result = await client.query(sql);
         let local = result;
         return { status: 200, result: local };
