@@ -41,7 +41,7 @@ module.exports.registerEvento = async function (newevento) {
 module.exports.getEvento = async function(id) {
     console.log("[EventoModels.getEvento] id = " + JSON.stringify(id))
     try {
-        let sql = 'select * from evento where evento_id = $1';
+        let sql = 'select *,st_x(evento_geo) lat1,st_y(evento_geo) long1 from evento where evento_id = $1';
         let result = await client.query(sql, [id]);
         let evento = result.rows;
         // if (pessoa.lenght > 0){
