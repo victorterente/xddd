@@ -6,7 +6,7 @@ const app = express();
 
 module.exports.getAlllocais = async function () {
     try {
-        let sql = "select *,st_x(local_geo) lat,st_y(local_geo) long from local;";
+        let sql = "select *,st_x(local_geo) lat1,st_y(local_geo) long1 from local;";
         let result = await client.query(sql);
         let local = result;
         return { status: 200, result: local };
@@ -19,7 +19,7 @@ module.exports.getAlllocais = async function () {
 module.exports.getLocais = async function(id) {
     console.log("[LocalModels.getLocais] id = " + JSON.stringify(id))
     try {
-        let sql = 'select * from local where local_id = $1';
+        let sql = 'select *,st_x(local_geo) lat1,st_y(local_geo) long1 from local where local_id = $1';
         let result = await client.query(sql, [id]);
         let local = result.rows;
         // if (pessoa.lenght > 0){
