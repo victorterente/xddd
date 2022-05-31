@@ -6,7 +6,7 @@ const app = express();
 module.exports.getTl = async function(id) {
     console.log("[TlModels.getTl] id = " + JSON.stringify(id))
     try {
-        let sql = 'select *,st_x(local_geo) lat,st_y(local_geo) long from local inner join tl on local_id = tl_local_id inner join tipo_local on tl_tipo_id = tipolocal_id where tipolocal_id = $1';
+        let sql = 'select *,st_x(local_geo) lat1,st_y(local_geo) long1 from local inner join tl on local_id = tl_local_id inner join tipo_local on tl_tipo_id = tipolocal_id where tipolocal_id = $1';
         let result = await client.query(sql, [id]);
         let tl = result.rows;
         // if (pessoa.lenght > 0){
