@@ -10,6 +10,7 @@ var localRouter = require('./routes/localroutes');
 var tipolocalRouter = require('./routes/tipolocalroutes');
 var eventoRouter = require('./routes/eventoroutes');
 var tlRouter = require('./routes/tlroutes');
+var inscricaoRouter = require('./routes/inscricaoroutes');
 
 var app = express();
 
@@ -26,5 +27,6 @@ app.use('/local', localRouter);
 app.use('/tipolocal', tipolocalRouter);
 app.use('/evento', eventoRouter);
 app.use('/tl', tlRouter);
+app.use('/reserva', inscricaoRouter);
 
 module.exports = app;
