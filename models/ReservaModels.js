@@ -3,6 +3,18 @@ const express = require('express');
 const {log} = require("debug");
 const app = express();
 
+module.exports.getAllinscricao = async function () {
+    try {
+        let sql = "Select * from inscricao";
+        let result = await client.query(sql);
+        let inscricao = result;
+        return { status: 200, result: inscricao };
+    } catch (err) {
+        console.log(err);
+        return { status: 500, result: err };
+    }
+};
+
 module.exports.reservaPessoa = async function (eventoId , pessoaId) {
     try {
         let sql = "SELECT * from inscricao WHERE inscricao_evento = $1 and inscricao_pessoa = $2 "
