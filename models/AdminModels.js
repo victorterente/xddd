@@ -6,7 +6,7 @@ const app = express();
 
 module.exports.getAllAdmin = async function () {
     try {
-        let sql = "select * from pessoa inner join admin on pessoa_id = admin_pessoa_id;icao";
+        let sql = "select * from pessoa inner join admin on pessoa_id = admin_pessoa_id";
         let result = await client.query(sql);
         let admin = result;
         return { status: 200, result: admin };
