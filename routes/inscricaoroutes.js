@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var ReservaModels = require('../models/ReservaModelsModels');
+var ReservaModels = require('../models/ReservaModels');
 
 
 
