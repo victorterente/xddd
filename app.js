@@ -12,6 +12,8 @@ var eventoRouter = require('./routes/eventoroutes');
 var tlRouter = require('./routes/tlroutes');
 var inscricaoRouter = require('./routes/inscricaoroutes');
 var adminRouter = require('./routes/adminroutes');
+var monitorRouter = require('./routes/monitorroutes');
+
 
 
 var app = express();
@@ -31,6 +33,6 @@ app.use('/evento', eventoRouter);
 app.use('/tl', tlRouter);
 app.use('/reserva', inscricaoRouter);
 app.use('/admin', adminRouter);
-
+app.use('/monitor', monitorRouter);
 
 module.exports = app;
