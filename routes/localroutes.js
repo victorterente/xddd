@@ -5,6 +5,7 @@ var LocalModels = require('../models/LocalModels');
 
 
 
+
 router.get("/", async function (req, res, next) {
     let result = await LocalModels.getAlllocais();
     res.status(result.status).send(result.result.rows);
@@ -17,6 +18,10 @@ router.get('/:id(\\d+)', async function(req, res, next) {
     res.status(result.status).send(result.data);
 
 });
-
+router.post('/new',async function(req, res, next) {
+    let body = req.body
+    let result = await LocalModels.registerLocal(body);
+    res.status(result.status).send(result.data);
+});
 module.exports = router;
 

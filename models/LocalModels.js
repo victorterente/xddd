@@ -15,6 +15,26 @@ module.exports.getAlllocais = async function () {
         return { status: 500, result: err };
     }
 };
+module.exports.registerLocal = async function (newlocal) {
+    try {
+        let nome = newlocal.nome;
+        let morada = newlocal.morada;
+        let tlm = newlocal.tlm;
+        let geo = newlocal.geo;
+        let desc = newlocal.desc;
+        let img = newlocal.img;
+
+
+        var sql = 'INSERT INTO local (local_nome, local_morada, local_tlm, local_desc, local_geo, local_img) VALUES ($1,$2,$3,$4,$5,$6)';
+        let result = await client.query(sql,[ nome, morada, tlm, desc, geo, img ])
+        let pessoa = result.rows;
+        return { status: 200, result: { msg: "registado com sucesso" }, data : pessoa };;
+        //   }
+    } catch (err) {
+        console.log(err);
+        return { status: 500, result: err };
+    }
+};
 
 module.exports.getLocais = async function(id) {
     console.log("[LocalModels.getLocais] id = " + JSON.stringify(id))
