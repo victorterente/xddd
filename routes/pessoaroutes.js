@@ -12,6 +12,13 @@ router.get('/:id(\\d+)', async function(req, res, next) {
     res.status(result.status).send(result.data);
 
 });
+router.delete('/delete/:id(\\d+)', async function(req, res, next) {
+    let id = req.params.id
+    console.log("[pessoaroutes] Deleting boat with id: "+ id);
+    let result = await PessoaModels.deleteUser(id);
+    res.status(result.status).send(result.data);
+
+});
 
 router.get('/login/:email/:password', async function(req, res, next) {
     let email = req.params.email
