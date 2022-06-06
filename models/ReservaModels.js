@@ -37,6 +37,7 @@ module.exports.reservaPessoa = async function (eventoId , pessoaId) {
         else {
             let sql = "INSERT INTO inscricao (inscricao_evento, inscricao_pessoa) values ($1,$2)";
             let result = await client.query(sql, [eventoId , pessoaId]);
+
             return { status: 200, result: { msg: "Inscrição efectuada com sucesso" } };
         }
     } catch (err) {
