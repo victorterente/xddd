@@ -15,18 +15,25 @@ module.exports.getAllinscricao = async function () {
     }
 };
 
-module.exports.getAllinscricaobyidpessoa = async function (id) {
-
+module.exports.getUser = async function(id) {
+    console.log("[ReservaModels.getUser] id = " + JSON.stringify(id));
     try {
-        let sql = 'select * from evento inner join inscricao on evento_id = inscricao_evento  where inscricao_pessoa = $1';
+        let sql = `select evento_nome from evento inner join inscricao on evento_id = inscricao_evento   where inscricao_pessoa = $1`;
         let result = await client.query(sql, [id]);
-        let inscricao = result.rows;
-        return { status: 200, result: inscricao };
+        let user = result.rows;
+        if (user.length > 0) {
+            console.log("[userModel.getUser] user = " + JSON.stringify(user[0]));
+            return { status: 200, data: user[0] };
+        } else {
+            return { status: 404, data: { msg: "User not found." } };
+        }
+
     } catch (err) {
         console.log(err);
-        return { status: 500, result: err };
+        return { status: 500, data: err };
     }
-};
+
+}
 
 module.exports.reservaPessoa = async function (eventoId , pessoaId) {
     try {

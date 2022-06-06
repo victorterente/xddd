@@ -12,8 +12,8 @@ router.get("/", async function (req, res, next) {
 
 router.get('/:id(\\d+)', async function(req, res, next) {
     let id = req.params.id
-    console.log("[inscricaoroutes] user with id:" + id );
-    let result = await ReservaModels.getAllinscricaobyidpessoa(id);
+    console.log("[inscricaoroutes] user with id: "+ id);
+    let result = await ReservaModels.getUser(id);
     res.status(result.status).send(result.data);
 
 });
