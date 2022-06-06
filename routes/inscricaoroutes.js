@@ -9,17 +9,18 @@ router.get("/", async function (req, res, next) {
     let result = await ReservaModels.getAllinscricao();
     res.status(result.status).send(result.result.rows);
 });
-router.get('/:id(\\d+)', async function(req, res, next) {
 
-    console.log("[pessoaroutes] user with id:" );
-    let result = await ReservaModels.getAllinscricaobyidpessoa();
+router.get('/:id(\\d+)', async function(req, res, next) {
+    let id = req.params.id
+    console.log("[pessoaroutes] user with id:" + id );
+    let result = await ReservaModels.getAllinscricaobyidpessoa(id);
     res.status(result.status).send(result.data);
 
 });
 
 router.post('/:id(\\d+)/reservas', async function(req, res, next) {
     let campoId = req.body.eventoId;
-    let PessoaId = req.body.pessoaId
+    let PessoaId = req.body.pessoaId;
     console.log("Reserva feita with id "+PessoaId);
     let result = await ReservaModels.reservaPessoa(campoId, PessoaId);
     res.status(result.status).send(result.result.rows);
