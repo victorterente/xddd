@@ -15,6 +15,19 @@ module.exports.getAllinscricao = async function () {
     }
 };
 
+module.exports.getAllinscricaobyidpessoa = async function (id) {
+    console.log("[ReservaModels.getAllinscricaobyidpessoa] id = " + JSON.stringify(id))
+    try {
+        let sql = "select evento_nome from evento inner join inscricao on evento_id = inscricao_evento inner join pessoa  on pessoa_id = inscricao_pessoa where pessoa_id = $1";
+        let result = await client.query(sql, [id]);
+        let inscricao = result.rows;
+        return { status: 200, result: inscricao };
+    } catch (err) {
+        console.log(err);
+        return { status: 500, result: err };
+    }
+};
+
 module.exports.reservaPessoa = async function (eventoId , pessoaId) {
     try {
         let sql = "SELECT * from inscricao WHERE inscricao_evento = $1 and inscricao_pessoa = $2"
