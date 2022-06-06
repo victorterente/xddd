@@ -14,6 +14,20 @@ module.exports.getAllEventos = async function () {
         return { status: 500, result: err };
     }
 };
+
+module.exports.deleteEvento = async function(id) {
+    console.log("[EventoModels.deleteEvento] id = " + JSON.stringify(id));
+    try {
+        let sql = `delete
+                   from evento
+                   where evento_id = $1`
+        let result = await client.query(sql, [id]);
+        return {status: 200, data: "Deletion was successful"}
+    } catch (err) {
+        console.log(err);
+        return {status: 500, data: err};
+    }
+}
 module.exports.registerEvento = async function (newevento) {
     try {
         let nome = newevento.nome;

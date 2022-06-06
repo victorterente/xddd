@@ -21,7 +21,7 @@ router.get('/:id(\\d+)', async function(req, res, next) {
 });
 router.delete('/delete/:id(\\d+)', async function(req, res, next) {
     let id = req.params.id
-    console.log("[localroutes] Deleting boat with id: "+ id);
+    console.log("[localroutes] Deleting evento with id: "+ id);
     let result = await LocalModels.deleteLocal(id);
     res.status(result.status).send(result.data);
 
