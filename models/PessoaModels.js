@@ -40,6 +40,30 @@ module.exports.deleteUser = async function(id) {
     }
 }
 
+module.exports.updateUser = async function(user) {
+    if (typeof user != "object" ) {
+        if (user.errMsg)
+            return { status: 400, data: { msg: user.errMsg } };
+        else
+            return { status: 400, data: { msg: "Malformed data" } };
+    } try {
+        let updateQuery = `update pessoa
+                       set pessoa_nome = '${user.nome}',
+                       pessoa_email= '${user.email}',
+                       pessoa_morada= '${user.morada}',
+                         pessoa_tlm= '${user.tlm}',
+                       pessoa_pass = '${user.pass}'
+                       where pessoa_id = ${user.id}`
+        let result = await client.query(updateQuery);
+
+
+        console.log("[PessoaModels.updateUser] user = " + JSON.stringify(user));
+        return {status: 200, data: "Updated succesfully"};
+    }catch (err) {
+        console.log(err);
+        return { status: 500, data: err };
+    }
+}
     module.exports.getUserLogin = async function (email, password) {
         console.log("[PessoaModels.getUser] Login = Email: " + JSON.stringify(email) + " Password: " + +JSON.stringify(password));
 

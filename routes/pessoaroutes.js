@@ -20,6 +20,14 @@ router.delete('/delete/:id(\\d+)', async function(req, res, next) {
 
 });
 
+router.put('/update', async function(req, res, next) {
+    let user = req.body;
+    console.log("[pessoaroutes] Updating user" + JSON.stringify(user));
+    let result = await PessoaModels.updateUser(user);
+    res.status(result.status).send(result.data);
+
+});
+
 router.get('/login/:email/:password', async function(req, res, next) {
     let email = req.params.email
     let password = req.params.password
