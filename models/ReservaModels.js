@@ -22,7 +22,7 @@ module.exports.getUser = async function(id) {
         let result = await client.query(sql, [id]);
         let user = result.rows;
         if (user.length > 0) {
-            console.log("[userModel.getUser] user = " + JSON.stringify(user[0]));
+            console.log("[userModel.getUser] user = " + JSON.stringify(user[3]));
             return { status: 200, data: user[0] };
         } else {
             return { status: 404, data: { msg: "User not found." } };
