@@ -35,6 +35,19 @@ module.exports.registerLocal = async function (newlocal) {
         return { status: 500, result: err };
     }
 };
+module.exports.deleteLocal = async function(id) {
+    console.log("[LocalModels.deleteLocal] id = " + JSON.stringify(id));
+    try {
+        let sql = `delete
+                   from local
+                   where local_id = $1`
+        let result = await client.query(sql, [id]);
+        return {status: 200, data: "Deletion was successful"}
+    } catch (err) {
+        console.log(err);
+        return {status: 500, data: err};
+    }
+}
 
 module.exports.getLocais = async function(id) {
     console.log("[LocalModels.getLocais] id = " + JSON.stringify(id))

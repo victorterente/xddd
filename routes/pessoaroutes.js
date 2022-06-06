@@ -20,7 +20,7 @@ router.delete('/delete/:id(\\d+)', async function(req, res, next) {
 
 });
 
-router.put('/update', async function(req, res, next) {
+router.put('/update/:id(\\d+)', async function(req, res, next) {
     let user = req.body;
     console.log("[pessoaroutes] Updating user" + JSON.stringify(user));
     let result = await PessoaModels.updateUser(user);

@@ -53,8 +53,8 @@ module.exports.updateUser = async function(user) {
                        pessoa_morada= '${user.morada}',
                          pessoa_tlm= '${user.tlm}',
                        pessoa_pass = '${user.pass}'
-                       where pessoa_id = ${user.id}`
-        let result = await client.query(updateQuery);
+                       where pessoa_id = $1`
+        let result = await client.query(updateQuery, [id]);
 
 
         console.log("[PessoaModels.updateUser] user = " + JSON.stringify(user));
