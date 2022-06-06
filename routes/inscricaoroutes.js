@@ -18,11 +18,11 @@ router.get('/:id(\\d+)', async function(req, res, next) {
 
 });
 
-router.post('/:id(\\d+)/reservas', async function(req, res, next) {
-    let EventoId = req.body.eventoId;
-    let PessoaId = req.body.pessoaId;
+router.post('/reservar', async function(req, res, next) {
+    let eventoId = req.body.eventoId;
+    let pessoaId = req.body.pessoaId;
     console.log("Reserva feita with id "+PessoaId);
-    let result = await ReservaModels.reservaPessoa(EventoId, PessoaId);
+    let result = await ReservaModels.reservaPessoa(eventoId, pessoaId);
     res.status(result.status).send(result.result.rows);
 });
 module.exports = router;
