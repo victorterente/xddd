@@ -23,7 +23,7 @@ module.exports.getUser = async function(id) {
         let user = result.rows;
         if (user.length > 0) {
             console.log("[ReservaModels.getUser] user = " + JSON.stringify(user[0]));
-            return { status: 200, data: user[0] };
+            return { status: 200, data: user };
         } else {
             return { status: 404, data: { msg: "User not found." } };
         }
