@@ -18,7 +18,7 @@ module.exports.getAllinscricao = async function () {
 module.exports.getUser = async function(id) {
     console.log("[ReservaModels.getUser] id = " + JSON.stringify(id));
     try {
-        let sql = `select * from evento inner join inscricao on evento_id = inscricao_evento inner join pessoa on inscricao_pessoa = pessoa_id where pessoa_id = $1`;
+        let sql = `select evento_nome from evento inner join inscricao on evento_id = inscricao_evento inner join pessoa on inscricao_pessoa = pessoa_id where pessoa_id = $1`;
         let result = await client.query(sql, [id]);
         let user = result.rows;
         if (user.length > 0) {
