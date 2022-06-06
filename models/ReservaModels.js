@@ -18,7 +18,7 @@ module.exports.getAllinscricao = async function () {
 module.exports.getAllinscricaobyidpessoa = async function (id) {
 
     try {
-        let sql = "select * from evento inner join inscricao on evento_id = inscricao_evento  where inscricao_pessoa = $1";
+        let sql = 'select * from evento inner join inscricao on evento_id = inscricao_evento  where inscricao_pessoa = $1';
         let result = await client.query(sql, [id]);
         let inscricao = result.rows;
         return { status: 200, result: inscricao };
