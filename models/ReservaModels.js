@@ -15,10 +15,23 @@ module.exports.getAllinscricao = async function () {
     }
 };
 
+module.exports.deleteInscricao = async function(id) {
+    console.log("[PessoaModels.deleteUser] id = " + JSON.stringify(id));
+    try {
+        let sql = `delete
+                   from pessoa
+                   where pessoa_id = $1`
+        let result = await client.query(sql, [id]);
+        return {status: 200, data: "Deletion was successful"}
+    } catch (err) {
+        console.log(err);
+        return {status: 500, data: err};
+    }
+}
 module.exports.getUser = async function(id) {
     console.log("[ReservaModels.getUser] id = " + JSON.stringify(id));
     try {
-        let sql = ` select pessoa_id, pessoa_nome, evento_nome from evento inner join inscricao on evento_id = inscricao_evento inner join pessoa on inscricao_pessoa = pessoa_id where pessoa_id = $1`;
+        let sql = ` select evento_id, inscricao_id, pessoa_id, pessoa_nome, evento_nome from evento inner join inscricao on evento_id = inscricao_evento inner join pessoa on inscricao_pessoa = pessoa_id where pessoa_id = $1`;
         let result = await client.query(sql, [id]);
         let user = result.rows;
         if (user.length > 0) {
