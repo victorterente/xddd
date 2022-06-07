@@ -5,11 +5,19 @@ var ReservaModels = require('../models/ReservaModels');
 
 
 
+
 router.get("/", async function (req, res, next) {
     let result = await ReservaModels.getAllinscricao();
     res.status(result.status).send(result.result.rows);
 });
 
+router.delete('/delete/:id(\\d+)', async function(req, res, next) {
+    let id = req.params.id
+    console.log("[inscricaoroutes] Deleting boat with id: "+ id);
+    let result = await ReservaModels.deleteInscricao(id);
+    res.status(result.status).send(result.data);
+
+});
 router.get('/:id(\\d+)', async function(req, res, next) {
     let id = req.params.id
     console.log("[inscricaoroutes] user with id: "+ id);

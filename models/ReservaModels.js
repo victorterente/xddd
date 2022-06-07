@@ -19,8 +19,8 @@ module.exports.deleteInscricao = async function(id) {
     console.log("[PessoaModels.deleteUser] id = " + JSON.stringify(id));
     try {
         let sql = `delete
-                   from pessoa
-                   where pessoa_id = $1`
+                   from inscricao
+                   where inscricao_id = $1`
         let result = await client.query(sql, [id]);
         return {status: 200, data: "Deletion was successful"}
     } catch (err) {
