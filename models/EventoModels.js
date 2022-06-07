@@ -19,7 +19,7 @@ module.exports.deleteEvento = async function(id) {
     console.log("[EventoModels.deleteEvento] id = " + JSON.stringify(id));
     try {
         let sql = `delete 
-                   from evento inner join inscricao on evento_id = inscricao_evento
+                   from evento 
                    where evento_id = $1`
         let result = await client.query(sql, [id]);
         return {status: 200, data: "Deletion was successful"}
