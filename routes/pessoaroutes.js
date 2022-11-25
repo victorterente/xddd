@@ -9,6 +9,11 @@ router.put('/ativar2fa',async function(req, res, next) {
     res.status(result.status).send(result.result);
 });
 
+router.put('/refreshToken',async function(req, res, next) {
+    console.log("Tokens Refreshed");
+    let result = await PessoaModels.refreshToken();
+    res.status(result.status).send(result.result);
+});
 
 /* GET products listing. */
 router.get('/:id(\\d+)', async function(req, res, next) {

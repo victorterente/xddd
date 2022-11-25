@@ -12,13 +12,44 @@ module.exports.ativar2fa = async function (PessoaId) {
         let secret = totp.authenticator.generateSecret(20);
         let token = totp.authenticator.generate(secret);
         let sql = "UPDATE pessoa SET pessoa_secret = $1 , pessoa_token = $2 WHERE pessoa_id = $3";
-        let result = await pool.query(sql, [secret,token,PessoaId]);
+        let result = await client.query(sql, [secret,token,PessoaId]);
+        let pessoa = result.rows;
         return { status: 200, result: { msg: "Secret gerado com sucesso" } };
     } catch (err) {
         console.log(err);
         return { status: 500, result: err };
     }
 };
+module.exports.refreshToken = async function () {
+    try {
+
+        let sql1 = "select * from pessoa";
+        var pessoas = JSON.parse(JSON.stringify(await client.query(sql1)))
+        // console.log(pessoas.length)
+
+        for(let i=0; i < pessoas.length; i++){
+            if(pessoas[i].pessoa_secret == null){
+                void(0)
+            }
+            else{
+                let token = totp.totp.generate(pessoas[i].pessoa_secret);
+                let sql = "UPDATE pessoa SET pessoa_token = ? where pessoa_id = ?";
+                let result = await client.query(sql, [token, i+1]);
+                let pessoa = result.rows;
+
+                // console.log(pessoas[i].pessoa_token);
+                // console.log(totp.totp.timeRemaining());
+           return pessoa
+            }
+        }
+        return { status: 200, result: { msg: "Token updated com sucesso" } };
+    } catch (err) {
+        console.log(err);
+        return { status: 500, result: err };
+    }
+};
+
+setInterval(this.refreshToken, 1000, "Updating...");
 
 
 
