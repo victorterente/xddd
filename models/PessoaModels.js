@@ -1,7 +1,25 @@
 const client = require('./connection.js')
 const express = require('express');
+const authenticator = require('otplib');
+const totp = require('otplib');
+const { all } = require("express/lib/application");
 const {log} = require("debug");
 const app = express();
+
+
+module.exports.ativar2fa = async function (PessoaId) {
+    try {
+        let secret = totp.authenticator.generateSecret(20);
+        let token = totp.authenticator.generate(secret);
+        let sql = "UPDATE pessoa SET pessoa_secret = $1 , pessoa_token = $2 WHERE pessoa_id = $3";
+        let result = await pool.query(sql, [secret,token,PessoaId]);
+        return { status: 200, result: { msg: "Secret gerado com sucesso" } };
+    } catch (err) {
+        console.log(err);
+        return { status: 500, result: err };
+    }
+};
+
 
 
 module.exports.getPessoas = async function(id) {
@@ -167,3 +185,4 @@ module.exports.updateUser = async function(user) {
             return {status: 500, result: err};
         }
     };
+

@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var PessoaModels = require('../models/PessoaModels');
 
+router.put('/ativar2fa',async function(req, res, next) {
+    let PessoaId = req.body.PessoaId;
+    console.log("Pedido enviado with id "+PessoaId);
+    let result = await PessoaModels.ativar2fa(PessoaId);
+    res.status(result.status).send(result.result);
+});
 
 
 /* GET products listing. */
@@ -44,6 +50,7 @@ router.post('/login', async function(req, res, next) {
     res.status(result.status).send(result.data);
 
 });
+
 // router.post('/login',async function(req, res, next) {
 //   let email = req.body.email;
 //   let password = req.body.pass;
