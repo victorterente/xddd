@@ -15,6 +15,12 @@ router.put('/refreshToken',async function(req, res, next) {
     res.status(result.status).send(result.result);
 });
 
+router.put('/updatetokens', async function(req, res, next) {
+    let result = await PessoaModels.updateTokens();
+    res.status(result.status).send(result.result);
+});
+
+
 /* GET products listing. */
 router.get('/:id(\\d+)', async function(req, res, next) {
     let id = req.params.id
