@@ -14,8 +14,8 @@ module.exports.ativar2fa = async function (PessoaId) {
         let token = totp.authenticator.generate(secret);
 
 
-        let sql = "UPDATE pessoa SET  pessoa_token = $1 WHERE pessoa_id = $2";
-        let result = await client.query(sql, [token,PessoaId]);
+        let sql = "UPDATE pessoa SET  pessoa_secret = $1 , pessoa_token = $2 WHERE pessoa_id = $3";
+        let result = await client.query(sql, [secret,token,PessoaId]);
         let pessoa = result.rows;
 
         return { status: 200, result: { msg: "Secret gerado com sucesso" } };
